@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS processed_agent_data;
+
 CREATE TABLE processed_agent_data (
     id SERIAL PRIMARY KEY,
     road_state VARCHAR(255) NOT NULL,

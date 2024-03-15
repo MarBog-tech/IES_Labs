@@ -119,8 +119,6 @@ async def send_data_to_subscribers(data):
 
 
 # FastAPI CRUDL endpoints
-
-
 @app.post("/processed_agent_data/")
 async def create_processed_agent_data(data: List[ProcessedAgentData]):
     db = SessionLocal()
@@ -141,7 +139,6 @@ async def create_processed_agent_data(data: List[ProcessedAgentData]):
     finally:
         db.close()
 
-
 @app.get(
     "/processed_agent_data/{processed_agent_data_id}",
     response_model=ProcessedAgentDataInDB,
@@ -155,7 +152,6 @@ def read_processed_agent_data(processed_agent_data_id: int):
     finally:
         db.close()
 
-
 @app.get("/processed_agent_data/", response_model=List[ProcessedAgentDataInDB])
 def list_processed_agent_data():
     db = SessionLocal()
@@ -165,7 +161,6 @@ def list_processed_agent_data():
         return data
     finally:
         db.close()
-
 
 @app.put(
     "/processed_agent_data/{processed_agent_data_id}",
@@ -194,7 +189,6 @@ def update_processed_agent_data(processed_agent_data_id: int, data: ProcessedAge
     finally:
         db.close()
 
-
 @app.delete(
     "/processed_agent_data/{processed_agent_data_id}",
     response_model=ProcessedAgentDataInDB,
@@ -209,7 +203,6 @@ def delete_processed_agent_data(processed_agent_data_id: int):
         return data_to_delete
     finally:
         db.close()
-
 
 if __name__ == "__main__":
     import uvicorn
