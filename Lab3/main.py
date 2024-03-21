@@ -8,7 +8,7 @@ from datetime import datetime
 import paho.mqtt.client as mqtt
 
 from app.adapters.store_api_adapter import StoreApiAdapter
-from app.entities.agent_data import AgentData, AccelerometerData, GpsData
+# from app.entities.agent_data import EdgeData, AccelerometerData, GpsData
 from app.entities.processed_agent_data import ProcessedAgentData
 from config import (
     STORE_API_BASE_URL,
@@ -89,27 +89,27 @@ def on_message(client, userdata, msg):
     except Exception as e:
         logging.info(f"Error processing MQTT message: {e}")
 
-def mqtt_request_emulator():
-    processed_data = {
-        "road_state": "Good",
-        "agent_data": {
-            "accelerometer": {
-                "x": 1.0,
-                "y": 2.0,
-                "z": 3.0
-            },
-            "gps": {
-                "latitude": 50.12345,
-                "longitude": 13.78901
-            },
-            "timestamp": "2024-03-15T14:34:20.236457"
-        }
-    }
-    json_string = json.dumps(processed_data)
-    while True:
-        # Publish the encoded payload
-        client.publish(MQTT_TOPIC, payload=json_string)
-        time.sleep(5)
+# def mqtt_request_emulator():
+#     processed_data = {
+#         "road_state": "Good",
+#         "agent_data": {
+#             "accelerometer": {
+#                 "x": 1.0,
+#                 "y": 2.0,
+#                 "z": 3.0
+#             },
+#             "gps": {
+#                 "latitude": 50.12345,
+#                 "longitude": 13.78901
+#             },
+#             "timestamp": "2024-03-15T14:34:20.236457"
+#         }
+#     }
+#     json_string = json.dumps(processed_data)
+#     while True:
+#         # Publish the encoded payload
+#         client.publish(MQTT_TOPIC, payload=json_string)
+#         time.sleep(5)
 
 # Connect
 client.on_connect = on_connect
@@ -118,5 +118,5 @@ client.connect(MQTT_BROKER_HOST, MQTT_BROKER_PORT)
 
 # Start
 client.loop_start()
-mqtt_request_emulator()
+# mqtt_request_emulator()
 
